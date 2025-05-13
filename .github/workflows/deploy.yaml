@@ -41,7 +41,7 @@ jobs:
           # Clone repositories
           REPOS=(
             https://github.com/zuedev/monorepo
-            https://github.com/zuedev/Arcanum
+            https://github.com/zuedev/arcanum
           )
           for repo in "${REPOS[@]}"; do
             git clone --bare "$repo" /tmp/repos/$(basename "$repo")
