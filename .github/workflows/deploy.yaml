@@ -30,7 +30,7 @@ jobs:
       - name: Install git-arr and generate output
         run: |
           # Install dependencies
-          sudo apt update && sudo apt install -y python-bottle python-pygments
+          sudo apt update && sudo apt install -y python3-bottle python3-pygments
 
           # Create directories
           mkdir -p /tmp/clones
