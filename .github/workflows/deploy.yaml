@@ -28,6 +28,8 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Install git-arr and generate output
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Install dependencies
           sudo apt update && sudo apt install -y python3-bottle python3-pygments
@@ -46,7 +48,8 @@ jobs:
 
             # if the repo is from github.com, grab the description from the api and add it to the repo config
             if [[ "$repo" == *"github.com"* ]]; then
-              DESC=$(curl -s https://api.github.com/repos/$(basename "$repo") | jq -r .description)
+              ORG=$(echo "$repo" | cut -d '/' -f 4)
+              DESC=$(gh api https://api.github.com/repos/"$ORG"/$(basename "$repo") | jq -r '.description')
 
               # if the description is empty, set it to "No description"
               if [[ -z "$DESC" ]]; then
