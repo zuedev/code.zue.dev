@@ -66,6 +66,10 @@ jobs:
           tar -xzf git-arr-0.31.tar.gz
           chmod +x git-arr-0.31/git-arr
 
+          # make our edits to git-arr source
+          # replace "git" in all view titles with "code.zue.dev"
+          sed -i 's/<title>git/<title>code.zue.dev/g' git-arr-0.31/views/*.html
+
           # run git-arr
           ./git-arr-0.31/git-arr --config config.conf generate --output out
       - name: Upload artifact
