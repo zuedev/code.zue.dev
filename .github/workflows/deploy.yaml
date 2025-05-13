@@ -69,6 +69,8 @@ jobs:
           # make our edits to git-arr source
           # replace "git" in all view titles with "code.zue.dev"
           sed -i 's/<title>git/<title>code.zue.dev/g' git-arr-0.31/views/*.html
+          # replace "git" in all view h1 tags with "code.zue.dev"
+          sed -i 's/<h1>git/<h1>code.zue.dev/g' git-arr-0.31/views/*.html
 
           # run git-arr
           ./git-arr-0.31/git-arr --config config.conf generate --output out
