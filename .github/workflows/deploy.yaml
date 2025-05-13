@@ -43,6 +43,19 @@ jobs:
           )
           for repo in "${REPOS[@]}"; do
             git clone --depth 1 "$repo" /tmp/repos/$(basename "$repo")
+
+            # if the repo is from github.com, grab the description from the api and add it to the repo config
+            if [[ "$repo" == *"github.com"* ]]; then
+              DESC=$(curl -s https://api.github.com/repos/$(basename "$repo") | jq -r .description)
+
+              # if the description is empty, set it to "No description"
+              if [[ -z "$DESC" ]]; then
+                DESC="No description"
+              fi
+
+              # add the description to the config
+              echo "description = \"$DESC\"" > /tmp/repos/$(basename "$repo")/description
+            fi
           done
 
           # get git-arr
