@@ -29,13 +29,13 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install git-arr and generate output
         run: |
-          CLONES=(
+          REPOS=(
             https://github.com/zuedev/monorepo
             https://github.com/zuedev/Arcanum
           )
 
-          for repo in "${CLONES[@]}"; do
-            git clone --depth 1 "$repo" /tmp/clones
+          for repo in "${REPOS[@]}"; do
+            git clone --depth 1 "$repo" /tmp/clones/$(basename "$repo")
           done
 
           wget https://blitiri.com.ar/p/git-arr/files/0.31/git-arr-0.31.tar.gz
