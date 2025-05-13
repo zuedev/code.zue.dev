@@ -32,7 +32,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Install dependencies
-          sudo apt update && sudo apt install -y python3-bottle python3-pygments
+          sudo apt update && sudo apt install -y python3-bottle python3-pygments python3-markdown
 
           # Create directories
           mkdir -p /tmp/clones
