@@ -54,7 +54,7 @@ jobs:
               fi
 
               # add the description to the config
-              echo "description = \"$DESC\"" > /tmp/repos/$(basename "$repo")/description
+              echo "$DESC" > /tmp/repos/$(basename "$repo")/description
             fi
           done
 
