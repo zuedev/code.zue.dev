@@ -1,0 +1,51 @@
+name: Run git-arr and deploy output to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *" # Every day at midnight UTC
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Install git-arr and generate output
+        run: |
+          REPOS=(
+            https://github.com/zuedev/monorepo
+            https://github.com/zuedev/Arcanum
+          )
+
+          for repo in "${REPOS[@]}"; do
+            git clone --depth 1 "$repo" /tmp/repos
+          done
+
+          wget https://blitiri.com.ar/p/git-arr/files/0.31/git-arr-0.31.tar.gz
+          tar -xzf git-arr-0.31.tar.gz
+          ./git-arr-0.31/git-arr --config config.conf generate --output out
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: "out"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
