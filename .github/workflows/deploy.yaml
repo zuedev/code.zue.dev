@@ -42,7 +42,7 @@ jobs:
             https://github.com/zuedev/Arcanum
           )
           for repo in "${REPOS[@]}"; do
-            git clone --depth 1 "$repo" /tmp/repos/$(basename "$repo")
+            git clone --bare "$repo" /tmp/repos/$(basename "$repo")
 
             # if the repo is from github.com, grab the description from the api and add it to the repo config
             if [[ "$repo" == *"github.com"* ]]; then
