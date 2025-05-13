@@ -29,17 +29,28 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install git-arr and generate output
         run: |
+          # Install dependencies
+          apt install -y python-bottle python-pygments
+
+          # Create directories
+          mkdir -p /tmp/clones
+          mkdir -p out
+
+          # Clone repositories
           REPOS=(
             https://github.com/zuedev/monorepo
             https://github.com/zuedev/Arcanum
           )
-
           for repo in "${REPOS[@]}"; do
             git clone --depth 1 "$repo" /tmp/clones/$(basename "$repo")
           done
 
+          # get git-arr
           wget https://blitiri.com.ar/p/git-arr/files/0.31/git-arr-0.31.tar.gz
           tar -xzf git-arr-0.31.tar.gz
+          chmod +x git-arr-0.31/git-arr
+
+          # run git-arr
           ./git-arr-0.31/git-arr --config config.conf generate --output out
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
