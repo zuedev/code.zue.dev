@@ -70,7 +70,7 @@ jobs:
           # replace "git" in all view titles with "code.zue.dev"
           sed -i 's|\(<title>.*\)git\(.*</title>\)|\1code.zue.dev\2|' git-arr-0.31/views/*.html
           # replace "git" in all view h1 tags with "code.zue.dev"
-          sed -i 's|\(<h1>.*\)git\(.*</h1>\)|\1code.zue.dev\2|' git-arr-0.31/views/*.html
+          sed -i '/<h1>/{:a;/<\/h1>/!{$!{N;ba;};};s/\n/__SED_NL__/g;s|\(<h1>.*\)git\(.*</h1>\)|\1code.zue.dev\2|;s/__SED_NL__/\n/g;}' git-arr-0.31/views/*.html
 
           # run git-arr
           ./git-arr-0.31/git-arr --config config.conf generate --output out
