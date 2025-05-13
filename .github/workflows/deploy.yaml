@@ -42,7 +42,7 @@ jobs:
             https://github.com/zuedev/Arcanum
           )
           for repo in "${REPOS[@]}"; do
-            git clone --depth 1 "$repo" /tmp/clones/$(basename "$repo")
+            git clone --depth 1 "$repo" /tmp/repos/$(basename "$repo")
           done
 
           # get git-arr
