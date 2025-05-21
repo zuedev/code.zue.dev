@@ -8,4 +8,4 @@ This is a collection of my favourite code repositories. The goal is to make them
 
 ## Usage
 
-The site is available at both [code.zue.dev](https://code.zue.dev) and [zuedev.github.io/code.zue.dev](https://zuedev.github.io/code.zue.dev). You can use either URL to access the site. The site is built using [git-arr](https://blitiri.com.ar/p/git-arr/) ([my mirror](https://github.com/zuedev/git-arr)).
+The site is available at [zuedev.github.io/code.zue.dev](https://zuedev.github.io/code.zue.dev). The site is built using [git-arr](https://blitiri.com.ar/p/git-arr/) ([my mirror](https://github.com/zuedev/git-arr)).
